@@ -17,4 +17,5 @@ class Expenses(db.Model):
     value = db.Column(db.Float)
 
     def __repr__(self):
-        return '<Expense %r>' % (self.description)
+        s = '<Expense {0}: {1}>'
+        return  s.format(self.description, self.value)
