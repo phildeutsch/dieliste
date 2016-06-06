@@ -3,4 +3,27 @@
     {% for expense in expenses %}
     <div><p>{{ expense.user }} paid: {{ expense.value }} for {{expense.description}} on Trip #{{expense.trip}}</p></div>
     {% endfor %}
+
+    <h1>Add Expense</h1>
+      <form action="" method="post" name="add_expense">
+          {{ form.hidden_tag() }}
+          <p>
+              User name:<br>
+              {{ form.user_name(size=80) }}<br>
+          </p>
+          <p>
+              Trip ID:<br>
+              {{ form.trip_id(size=80) }}<br>
+          </p>
+          <p>
+              Description:<br>
+              {{ form.description(size=80) }}<br>
+          </p>
+          <p>
+              Value:<br>
+              {{ form.value(size=80) }}<br>
+          </p>
+          <p><input type="submit" value="Sign In"></p>
+      </form>
+
 {% endblock %}

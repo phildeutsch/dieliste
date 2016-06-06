@@ -4,7 +4,7 @@ from .forms import expenseForm
 
 # index view function suppressed for brevity
 
-@app.route('/index')
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     expenses = [
         {
@@ -21,6 +21,9 @@ def index():
         }
     ]
 
+    form = expenseForm()
+
     return render_template("index.html",
                            title='Home',
-                           expenses=expenses)
+                           expenses=expenses,
+                           form=form)

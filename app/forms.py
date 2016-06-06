@@ -1,4 +1,4 @@
-from flask_wtf  import Form
+from flask_wtf import Form
 from wtforms import TextField, IntegerField, DecimalField
 from wtforms.validators import DataRequired
 
