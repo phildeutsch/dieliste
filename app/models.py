@@ -4,7 +4,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nickname = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
-    Expenses = db.relationship('Expenses', backref='user', lazy='dynamic')
+    expenses = db.relationship('Expenses', backref='user', lazy='dynamic')
 
     def __repr__(self):
         return '<User %r>' % (self.nickname)
@@ -17,4 +17,4 @@ class Expenses(db.Model):
     value = db.Column(db.Float)
 
     def __repr__(self):
-        return '<Post %r>' % (self.body)
+        return '<Expense %r>' % (self.description)
