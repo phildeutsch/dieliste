@@ -1,17 +1,34 @@
 from app import db
 
-class Users(db.Model):
+trips = db.Table('trips',
+    db.Column('trip_id', db.Integer, db.ForeignKey('trip.id')),
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'))
+)
+
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nickname = db.Column(db.String(64), index=True, unique=True)
+
+    expenses = db.relationship('Expense', backref='username')
+
+    username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
-    expenses = db.relationship('Expenses', backref='user', lazy='dynamic')
-    trips = db.relationship('Trips', backref='user', lazy='dynamic')
+
+    def __init__(self, username, email):
+        self.username = username
+        self.email = email
 
     def __repr__(self):
-        return '<User %r>' % (self.nickname)
+        s = '<User {0}: {1}>'
+        return s.format(self.id, self.username)
 
-class Trips(db.Model):
+class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+
+    expenses = db.relationship('Expense', backref='trip')
+
+    start_date = db.Column(db.DateTime)
+    end_date = db.Column(db.DateTime)
+    destination = db.Column(db.String(128))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
@@ -19,14 +36,16 @@ class Trips(db.Model):
         return  s.format(self.id)
 
 
-class Expenses(db.Model):
+class Expense(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    timestamp = db.Column(db.DateTime)
+
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
+
+    timestamp = db.Column(db.DateTime)
     description = db.Column(db.String(140))
     value = db.Column(db.Float)
 
     def __repr__(self):
-        s = '<Expense {0}: {1}>'
-        return  s.format(self.description, self.value)
+        s = '<Expense {0}: {1} paid {2} on trip {3} for {4}>'
+        return  s.format(self.id, self.user_id, self.value, self.trip_id, self.description)
