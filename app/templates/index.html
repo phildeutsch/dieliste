@@ -30,7 +30,7 @@
           {{ user_form.hidden_tag() }}
           <p>
               User name:<br>
-              {{ user_form.user_name(size=80) }}<br>
+              {{ user_form.username(size=80) }}<br>
           </p>
           <p><input type="submit" value="Add user"></p>
       </form>
@@ -50,7 +50,7 @@
               {{ expense_form.hidden_tag() }}
               <p>
                   User:<br>
-                  {{ expense_form.user_name(size=80) }}<br>
+                  {{ expense_form.username(size=80) }}<br>
               </p>
               <p>
                   Trip:<br>

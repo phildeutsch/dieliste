@@ -1,5 +1,5 @@
-from flask import render_template, flash, redirect
-from app import app
+from flask import render_template, flash, redirect, url_for
+from app import app, db
 from .forms import userForm, tripForm, expenseForm
 from .models import User, Trip, Expense
 
@@ -10,6 +10,13 @@ def index():
     user_form = userForm()
     trip_form = tripForm()
     expense_form = expenseForm()
+
+    if user_form.validate_on_submit():
+        user = User()
+        user_form.populate_obj(user)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('index'))
 
     return render_template("index.html",
                            title='Home',
