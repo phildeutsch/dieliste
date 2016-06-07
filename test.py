@@ -24,3 +24,4 @@ print(models.Trip.query.all())
 print(models.Expense.query.all())
 
 tom = models.User.query.get(1)
+t = models.Trip.query.get(1)

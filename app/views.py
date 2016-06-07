@@ -18,6 +18,20 @@ def index():
         db.session.commit()
         return redirect(url_for('index'))
 
+    if trip_form.validate_on_submit():
+        trip = Trip()
+        trip_form.populate_obj(trip)
+        db.session.add(trip)
+        db.session.commit()
+        return redirect(url_for('index'))
+
+    if expense_form.validate_on_submit():
+        expense = Expense()
+        expense_form.populate_obj(expense)
+        db.session.add(expense)
+        db.session.commit()
+        return redirect(url_for('index'))
+
     return render_template("index.html",
                            title='Home',
                            users=User.query.all(),

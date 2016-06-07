@@ -49,12 +49,12 @@
           <form action="" method="post" name="add_trip">
               {{ expense_form.hidden_tag() }}
               <p>
-                  User:<br>
-                  {{ expense_form.username(size=80) }}<br>
+                  Trip:<br>
+                  {{ expense_form.trip_id(size=3) }}<br>
               </p>
               <p>
-                  Trip:<br>
-                  {{ expense_form.trip_id(size=80) }}<br>
+                  User:<br>
+                  {{ expense_form.user_id(size=80) }}<br>
               </p>
               <p>
                   Description:<br>
