@@ -1,32 +1,70 @@
 {% extends "base.html" %}
 {% block content %}
+
+    <h3> Users </h3>
+    {% for user in users %}
+    <div><p>
+      {{ user.id }}: {{ user.username }}
+    </p></div>
+    {% endfor %}
+
+    <h3> Trips </h3>
+    {% for trip in trips %}
+    <div><p>
+      {{ trip.id }}: {{ trip.destination }}
+    </p></div>
+    {% endfor %}
+
+    <h3> Expenses </h3>
     {% for expense in expenses %}
-    <div><p>{{ expense.user.username }} paid
+    <div><p>
+      {{ expense.id }}:
+      {{ expense.user.username }} paid
       {{ expense.value }} for
       {{ expense.description }} on the trip to
       {{ expense.trip.destination }}</p></div>
     {% endfor %}
 
-    <h1>Add Expense</h1>
-      <form action="" method="post" name="add_expense">
-          {{ form.hidden_tag() }}
+    <h3>Add User</h3>
+      <form action="" method="post" name="add_user">
+          {{ user_form.hidden_tag() }}
           <p>
               User name:<br>
-              {{ form.user_name(size=80) }}<br>
+              {{ user_form.user_name(size=80) }}<br>
           </p>
-          <p>
-              Trip ID:<br>
-              {{ form.trip_id(size=80) }}<br>
-          </p>
-          <p>
-              Description:<br>
-              {{ form.description(size=80) }}<br>
-          </p>
-          <p>
-              Value:<br>
-              {{ form.value(size=80) }}<br>
-          </p>
-          <p><input type="submit" value="Sign In"></p>
+          <p><input type="submit" value="Add user"></p>
       </form>
+
+      <h3>Add Trip</h3>
+        <form action="" method="post" name="add_trip">
+            {{ trip_form.hidden_tag() }}
+            <p>
+                Destination:<br>
+                {{ trip_form.destination(size=80) }}<br>
+            </p>
+            <p><input type="submit" value="Add trip"></p>
+        </form>
+
+        <h3>Add Expense</h3>
+          <form action="" method="post" name="add_trip">
+              {{ expense_form.hidden_tag() }}
+              <p>
+                  User:<br>
+                  {{ expense_form.user_name(size=80) }}<br>
+              </p>
+              <p>
+                  Trip:<br>
+                  {{ expense_form.trip_id(size=80) }}<br>
+              </p>
+              <p>
+                  Description:<br>
+                  {{ expense_form.description(size=80) }}<br>
+              </p>
+              <p>
+                  Value:<br>
+                  {{ expense_form.value(size=80) }}<br>
+              </p>
+              <p><input type="submit" value="Add expense"></p>
+          </form>
 
 {% endblock %}
