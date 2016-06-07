@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
     {% for expense in expenses %}
-    <div><p>{{ expense.user }} paid: {{ expense.value }} for {{expense.description}} on Trip #{{expense.trip}}</p></div>
+    <div><p>{{ expense.user.username }} paid
+      {{ expense.value }} for
+      {{ expense.description }} on the trip to
+      {{ expense.trip.destination }}</p></div>
     {% endfor %}
 
     <h1>Add Expense</h1>
